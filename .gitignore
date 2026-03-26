@@ -1,0 +1,13 @@
+# Virtualenv
+venv/
+venv-tf/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Trained model
+*.h5
+
+# Log files
+history.json
