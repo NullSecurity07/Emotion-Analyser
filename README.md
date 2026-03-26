@@ -73,34 +73,34 @@ Webcam Input (Live Feed)
                 ├─ Sad
                 └─ Surprise
                     └─ Display overlay on bounding box
-````
+```
 
-<br>
+<br/>
 
-\<div align="center"\>
-\<img src="https://www.google.com/url?sa=E\&source=gmail\&q=https://capsule-render.vercel.app/api?type=rect%26color=0:3b82f6,100:101030%26height=1%26section=header" width="40%"/\>
-\</div\>
+<div align="center">
+<img src="https://capsule-render.vercel.app/api?type=rect&color=0:3b82f6,100:101030&height=1&section=header" width="40%"/>
+</div>
 
-<br>
+<br/>
 
-\<div align="center"\>
+<div align="center">
 
 ### — Setup —
 
-\</div\>
+</div>
 
-<br>
+<br/>
 
 **Requirements**
 
-  - Python 3.8+
-  - A working webcam
+- Python 3.8+
+- A working webcam
 
-<br>
+<br/>
 
 ```bash
 # 1. Clone the repository
-git clone [https://github.com/YOUR_USERNAME/emotion_analyser.git](https://github.com/YOUR_USERNAME/emotion_analyser.git)
+git clone https://github.com/NullSecurity07/Emotion-Analyser
 cd emotion_analyser
 
 # 2. Initialize virtual environment
@@ -115,21 +115,21 @@ venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-<br>
+<br/>
 
-\<div align="center"\>
-\<img src="https://www.google.com/url?sa=E\&source=gmail\&q=https://capsule-render.vercel.app/api?type=rect%26color=0:3b82f6,100:101030%26height=1%26section=header" width="40%"/\>
-\</div\>
+<div align="center">
+<img src="https://capsule-render.vercel.app/api?type=rect&color=0:3b82f6,100:101030&height=1&section=header" width="40%"/>
+</div>
 
-<br>
+<br/>
 
-\<div align="center"\>
+<div align="center">
 
 ### — Usage —
 
-\</div\>
+</div>
 
-<br>
+<br/>
 
 **1. Dataset Preparation**
 
@@ -147,7 +147,7 @@ assets/images/
     └── ...
 ```
 
-<br>
+<br/>
 
 **2. Model Training**
 
@@ -163,7 +163,7 @@ python trainmodel.py \
 
 *Note: This generates `emotiondetector.json`, `emotiondetector.h5`, and `history.json` upon completion.*
 
-<br>
+<br/>
 
 **3. Real-Time Detection**
 
@@ -173,7 +173,7 @@ Launch the inference script to open your webcam and begin live classification:
 python realtimedetection.py
 ```
 
-<br>
+<br/>
 
 **4. Performance Visualization**
 
@@ -183,21 +183,21 @@ Plot the training accuracy and loss curves from a previous run:
 python trainmodel.py --plot_history history.json
 ```
 
-<br>
+<br/>
 
-\<div align="center"\>
-\<img src="https://www.google.com/url?sa=E\&source=gmail\&q=https://capsule-render.vercel.app/api?type=rect%26color=0:3b82f6,100:101030%26height=1%26section=header" width="40%"/\>
-\</div\>
+<div align="center">
+<img src="https://capsule-render.vercel.app/api?type=rect&color=0:3b82f6,100:101030&height=1&section=header" width="40%"/>
+</div>
 
-<br>
+<br/>
 
-\<div align="center"\>
+<div align="center">
 
 ### — Stack —
 
-\</div\>
+</div>
 
-<br>
+<br/>
 
 | Technology | Purpose |
 |:---|:---|
@@ -207,10 +207,10 @@ python trainmodel.py --plot_history history.json
 | **NumPy** | Array manipulation and image data handling |
 | **Matplotlib** | Training history and performance visualization |
 
-<br>
+<br/>
 
-\<div align="center"\>
+<div align="center">
 
-\<img src="https://www.google.com/search?q=https://capsule-render.vercel.app/api%3Ftype%3Dwaving%26color%3D0:3b82f6,50:101030,100:050510%26height%3D120%26section%3Dfooter%26animation%3DfadeIn" width="100%"/\>
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:3b82f6,50:101030,100:050510&height=120&section=footer&animation=fadeIn" width="100%"/>
 
-\</div\>
+</div>
