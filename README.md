@@ -51,3 +51,7 @@ Complete learning project, not under active development. The weights file is not
 ## Built by
 
 Built by [Adithya Poojary](https://adithyapoojary.is-a.dev), founder of ThreatScope. [More projects](https://adithyapoojary.is-a.dev/work/) · [LinkedIn](https://www.linkedin.com/in/adithyapoojary/)
+
+## License
+
+MIT. See [LICENSE](LICENSE).
