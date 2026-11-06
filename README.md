@@ -1,216 +1,53 @@
-<div align="center">
+<p align="center"><a href="https://adithyapoojary.is-a.dev"><picture><source media="(prefers-color-scheme: light)" srcset=".github/readme/banner-light.svg"><img src=".github/readme/banner-dark.svg" alt="Emotion-Analyser: Seven emotions read live from your webcam" width="100%"></picture></a></p>
+<p align="center"><picture><source media="(prefers-color-scheme: light)" srcset=".github/readme/badges-light.svg"><img src=".github/readme/badges-dark.svg" alt="python: 3.9+, model: Keras CNN, classes: 7 emotions, status: complete" height="30"></picture></p>
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:050510,50:101030,100:3b82f6&height=220&section=header&text=Emotion%20Analyser&fontSize=56&fontColor=ffffff&fontAlignY=38&fontAlign=50&desc=Real-Time%20CNN%20Facial%20Expression%20Detection&descSize=16&descAlignY=58&descAlign=50&descColor=93c5fd80&animation=fadeIn" width="100%"/>
+Emotion Analyser reads facial expressions from a live webcam and labels each face with one of seven emotions. A compact CNN project for anyone learning how training and real-time inference fit together.
 
-</div>
+## Highlights
 
-<br/>
+- **Seven emotions, live.** Angry, disgust, fear, happy, neutral, sad and surprise, drawn over each detected face as the video runs.
+- **Your own model.** `trainmodel.py` builds and trains a four-block CNN (128, 256, 512, 512 filters) on 48x48 grayscale faces.
+- **Training and inference kept apart.** Train once, then the lightweight `realtimedetection.py` only loads the saved architecture and weights.
+- **Handy extras.** Plot the training curves from the saved history, or predict a single image, from the same script.
 
-<div align="center">
+## How it works
 
-*From raw camera feed to real-time emotion classification — powered by deep learning.*
+1. OpenCV's Haar cascade finds faces in each webcam frame.
+2. Each face is cropped, converted to grayscale, resized to 48x48 and normalised.
+3. The CNN predicts one of seven classes.
+4. The label and a box are drawn on the frame. Press `q` to quit.
 
-</div>
+## Quick start
 
-<br/>
-
-<div align="center">
-<img src="https://capsule-render.vercel.app/api?type=rect&color=0:3b82f6,100:101030&height=1&section=header" width="40%"/>
-</div>
-
-<br/>
-
-<div align="center">
-
-### — Overview —
-
-</div>
-
-<br/>
-
-Emotion Analyser is a computer vision project that implements a Convolutional Neural Network (CNN) for real-time facial expression recognition. It processes live webcam feeds, isolates human faces, and classifies the subject's expression into one of seven distinct emotional states. 
-
-The architecture separates model training from execution, allowing for rapid iterations on custom datasets while maintaining a lightweight runtime for live inference.
-
-<br/>
-
-<div align="center">
-<img src="https://capsule-render.vercel.app/api?type=rect&color=0:3b82f6,100:101030&height=1&section=header" width="40%"/>
-</div>
-
-<br/>
-
-<div align="center">
-
-### — Architecture —
-
-</div>
-
-<br/>
-
-| Component | Function |
-|:---|:---|
-| `trainmodel.py` | CNN compilation, dataset ingestion, and model training |
-| `realtimedetection.py` | Live webcam feed capture and bounding-box inference overlay |
-| `emotiondetector.json` | Exported neural network architecture |
-| `emotiondetector.h5` | Compiled and saved model weights |
-| `history.json` | Serialized training metrics (accuracy and loss) |
-
-<br/>
-
-**Inference Pipeline**
-
-```text
-Webcam Input (Live Feed)
-    └─ Face Detection (Haarcascade / OpenCV)
-        └─ Image Preprocessing (Grayscale, Resize, Normalize)
-            └─ CNN Inference (emotiondetector.h5)
-                ├─ Angry
-                ├─ Disgust
-                ├─ Fear
-                ├─ Happy
-                ├─ Neutral
-                ├─ Sad
-                └─ Surprise
-                    └─ Display overlay on bounding box
-```
-
-<br/>
-
-<div align="center">
-<img src="https://capsule-render.vercel.app/api?type=rect&color=0:3b82f6,100:101030&height=1&section=header" width="40%"/>
-</div>
-
-<br/>
-
-<div align="center">
-
-### — Setup —
-
-</div>
-
-<br/>
-
-**Requirements**
-
-- Python 3.8+
-- A working webcam
-
-<br/>
+Needs Python 3.9+, a webcam, and a face-expression dataset arranged as one folder per emotion (`angry/`, `disgust/`, `fear/`, `happy/`, `neutral/`, `sad/`, `surprise/`) under a `train/` and a `validation/` directory. The trained weights are not in the repo, so train first.
 
 ```bash
-# 1. Clone the repository
-git clone https://github.com/NullSecurity07/Emotion-Analyser
-cd emotion_analyser
-
-# 2. Initialize virtual environment
-python -m venv venv
-
-# Linux/macOS
-source venv/bin/activate
-# Windows
-venv\Scripts\activate
-
-# 3. Install dependencies
+git clone https://github.com/NullSecurity07/Emotion-Analyser.git
+cd Emotion-Analyser
+python -m venv venv && source venv/bin/activate
 pip install -r requirements.txt
-```
 
-<br/>
+# train (writes emotiondetector.json, emotiondetector.h5 and history.json)
+python trainmodel.py --train_dir path/to/train --test_dir path/to/validation --epochs 100
 
-<div align="center">
-<img src="https://capsule-render.vercel.app/api?type=rect&color=0:3b82f6,100:101030&height=1&section=header" width="40%"/>
-</div>
-
-<br/>
-
-<div align="center">
-
-### — Usage —
-
-</div>
-
-<br/>
-
-**1. Dataset Preparation**
-
-Ensure your training data is structured in the `assets/images/` directory before initiating a training run:
-
-```text
-assets/images/
-├── train/
-│   ├── angry/
-│   ├── disgust/
-│   └── ... (fear, happy, neutral, sad, surprise)
-└── validation/
-    ├── angry/
-    ├── disgust/
-    └── ...
-```
-
-<br/>
-
-**2. Model Training**
-
-Train the CNN from scratch. You can adjust the directories, epochs, and batch sizes via CLI arguments:
-
-```bash
-python trainmodel.py \
-  --train_dir assets/images/images/train \
-  --test_dir assets/images/images/validation \
-  --epochs 50 \
-  --batch_size 128
-```
-
-*Note: This generates `emotiondetector.json`, `emotiondetector.h5`, and `history.json` upon completion.*
-
-<br/>
-
-**3. Real-Time Detection**
-
-Launch the inference script to open your webcam and begin live classification:
-
-```bash
+# run on the webcam
 python realtimedetection.py
 ```
 
-<br/>
+Other options: `python trainmodel.py --plot_history history.json` and `python trainmodel.py --predict_image face.jpg`.
 
-**4. Performance Visualization**
+## Project layout
 
-Plot the training accuracy and loss curves from a previous run:
-
-```bash
-python trainmodel.py --plot_history history.json
+```
+trainmodel.py           build, train, plot history, predict one image
+realtimedetection.py    webcam inference
+emotiondetector.json    model architecture (weights are created by training)
 ```
 
-<br/>
+## Status
 
-<div align="center">
-<img src="https://capsule-render.vercel.app/api?type=rect&color=0:3b82f6,100:101030&height=1&section=header" width="40%"/>
-</div>
+Complete learning project, not under active development. The weights file is not published, so results depend on the dataset you train with.
 
-<br/>
+## Built by
 
-<div align="center">
-
-### — Stack —
-
-</div>
-
-<br/>
-
-| Technology | Purpose |
-|:---|:---|
-| **Python** | Core runtime |
-| **TensorFlow / Keras** | CNN architecture, compilation, and model training |
-| **OpenCV** | Computer vision, webcam interfacing, and face isolation |
-| **NumPy** | Array manipulation and image data handling |
-| **Matplotlib** | Training history and performance visualization |
-
-<br/>
-
-<div align="center">
-
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:3b82f6,50:101030,100:050510&height=120&section=footer&animation=fadeIn" width="100%"/>
-
-</div>
+Built by [Adithya Poojary](https://adithyapoojary.is-a.dev), founder of ThreatScope. [More projects](https://adithyapoojary.is-a.dev/work/) · [LinkedIn](https://www.linkedin.com/in/adithyapoojary/)
